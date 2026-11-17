@@ -1,0 +1,14 @@
+# Excel temporary lock files
+~$*.xlsx
+~$*.xls
+~$*.xlsm
+*.tmp
+
+# OS specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Heavy raw Kaggle archives
+DataCoSupplyChainDataset.csv
+*.zip

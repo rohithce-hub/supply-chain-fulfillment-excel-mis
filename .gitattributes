@@ -1,0 +1,6 @@
+*.xlsx binary
+*.pdf binary
+*.png binary
+*.jpg binary
+*.csv text eol=lf
+*.md text eol=lf
