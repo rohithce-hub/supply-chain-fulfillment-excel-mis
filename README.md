@@ -21,15 +21,13 @@ An end-to-end executive **Management Information System (MIS) Dashboard** built 
 > [!NOTE]
 > **Representative Sample vs. Full Kaggle Dataset Disclosure**:
 > * The complete raw [Kaggle DataCo Global Supply Chain Dataset](https://www.kaggle.com/datasets/shashwatwork/dataco-smart-supply-chain-for-big-data-analysis) contains **180,519 rows and 53 columns (~95.9 MB)** covering multi-year global supply chain transactions.
-> * For this executive Excel MIS dashboard, **the full 180K+ row dataset was intentionally not loaded into the spreadsheet**. Instead, a **statistically representative sample of 1,500 order shipment records** (reporting period: January – October 2026) was curated and modeled.
+> * For this executive Excel MIS dashboard, **the full 180K+ row dataset was intentionally not loaded into the spreadsheet**. Instead, **a curated sample designed to reflect the parent dataset's overall patterns** (1,500 order shipment records; reporting period: January – October 2026) was curated and modeled.
+> * **Data Adaptations**: Transaction dates were mapped to Jan–Oct 2026, dispatch and destination locations were localized to 4 Indian regional warehouse hubs and 10 Indian commercial cities, currency and freight costs were converted to INR (₹), and merchandise was consolidated into 5 retail product categories with modeled delivery lead times.
 
 ### Why 1,500 Rows for the Excel MIS Dashboard?
 1. **Excel Performance & Instant Slicer Interactivity**: Loading 180,000+ rows into an `.xlsx` workbook dramatically degrades PivotTable recalculation performance and Slicer filter responsiveness. The 1,500-row volume ensures sub-second slicer filtering with zero UI latency.
 2. **Repository Portability & Accessibility**: Keeps the workbook lightweight (~220 KB) and eliminates the need for Git LFS (Large File Storage), allowing recruiters, hiring managers, and stakeholders to immediately clone, view, and interact with the file in standard Microsoft Excel without performance bottlenecks.
-3. **Statistical & Distribution Fidelity**: The 1,500-order sample strictly preserves the macro distributions of the parent dataset:
-   * **Fulfillment SLA Rate**: ~78.3% on-time delivery rate vs. ~15.7% delay rate.
-   * **Lead-Time Dynamics**: Real-world transit variances across all 4 shipping tiers (*Same Day*, *First Class*, *Second Class*, *Standard Class*).
-   * **Demand Concentration**: Category volumes mirroring consumer demand across Apparel, Footwear, Outdoors, Sporting Goods, and Technology.
+3. **Pattern-Based Modeling**: The 1,500-order sample was curated to reflect operational supply chain patterns across 4 shipping tiers (*Same Day*, *First Class*, *Second Class*, *Standard Class*) and 5 core consumer merchandise lines.
 
 ---
 
@@ -42,14 +40,14 @@ LOGISTICS HEALTH & SLA PERFORMANCE AT A GLANCE (1,500 ORDERS)
 Total Orders Processed : 1,500 Orders
 On-Time Deliveries     : 1,175 Orders (78.33% Fulfillment Rate)
 Delayed Shipments      : 236 Orders (15.73% Delay Rate)
-Cancelled / Attrited   : 54 Orders (3.60%)
-Pending / In-Transit   : 35 Orders (2.33%)
+Cancelled / Attrited   : 53 Orders (3.53%)
+Pending / In-Transit   : 36 Orders (2.40%)
 Total Order Value      : ₹ 88,36,686 (~$106K USD)
 ======================================================================================================
 ```
 
 ### 🔍 Key Business Findings:
-1. **The Fulfillment SLA Gap**: 78.33% of shipments arrived strictly on schedule, leaving **15.73% (236 shipments)** delayed. Root-cause analysis indicates standard road freight experiences peak delays during multi-state hub transits.
+1. **The Fulfillment SLA Gap**: 78.33% of shipments arrived strictly on schedule, leaving **15.73% (236 shipments)** delayed.
 2. **Category Demand Volume**: **Apparel (484 orders)** and **Footwear (359 orders)** represent **56.2% of total order volume**, requiring dedicated buffer stock and prioritized carrier allocation.
 3. **Logistics Lead-Time Variance**:
    - **Same Day**: Scheduled 0.0 days vs. Actual 0.1 days (Near-perfect 98% SLA compliance).
@@ -127,8 +125,8 @@ graph TD
 ## 🚀 Business Recommendations & Actionable Strategy
 
 Based on the 10-month operational data:
-1. **Standard Class Carrier Re-negotiation**: Standard class accounts for over 55% of volume and 88% of delayed orders. Introduce penalty-backed SLA guarantees with 3PL courier partners for delays exceeding 5 transit days.
-2. **South Corridor Forward-Deployment**: With Bengaluru and Kochi driving over 560 orders, establish micro-fulfillment hubs in South India to cut transit lead time from 2.6 days to sub-24 hours.
+1. **Standard Class Carrier Re-negotiation**: Standard Class accounts for 55.0% of total volume (825 orders) and 53.0% of all delayed shipments (125 of 236 delays). Introduce penalty-backed SLA guarantees with 3PL courier partners for delays exceeding 5 transit days.
+2. **South Corridor Forward-Deployment**: With Bengaluru and Kochi driving 560 orders (37.3% of total volume), establish dedicated micro-fulfillment hubs in South India to compress regional transit lead times toward sub-24-hour fulfillment.
 3. **Automated Delay Exception Alerts**: Trigger real-time customer notification for orders flagged with `Actual_Days > Scheduled_Days` by Day 3 to proactively curb customer cancellations.
 
 ---
@@ -136,12 +134,24 @@ Based on the 10-month operational data:
 ## 📂 Repository Contents
 
 ```text
-├── Supply_Chain_Fulfillment_MIS_Dashboard.xlsx   # Main Excel file with Data, Calcs & Dashboard
-├── Supply_Chain_Fulfillment_MIS_Dashboard.pdf    # 1-Page Vector PDF export of the Dashboard
-├── Supply_Chain_Fulfillment_MIS_Dashboard.png    # High-resolution dashboard image for presentations
-├── DataCoSupplyChainDataset.csv                  # Original Kaggle DataCo source dataset
-├── DescriptionDataCoSupplyChain.csv              # Metadata dictionary & feature descriptions
-└── README.md                                     # Project documentation & business insights
+supply-chain-fulfillment-excel-mis/
+├── dashboard/
+│   └── Supply_Chain_Fulfillment_MIS_Dashboard.xlsx   # Main Excel workbook with Raw_Data, Pivot_Calcs & Dashboard UI
+├── data/
+│   ├── DescriptionDataCoSupplyChain.csv              # Kaggle DataCo metadata dictionary & column definitions
+│   └── orders_fulfillment_dataset_1500.csv           # Curated 1,500-order transactional shipment dataset
+├── documentation/
+│   ├── LinkedIn_Post_Content.txt                     # LinkedIn portfolio showcase text & copy templates
+│   └── Supply_Chain_Fulfillment_MIS_Dashboard.pdf    # Clean 1-page vector PDF export of the executive dashboard
+├── screenshots/
+│   └── Supply_Chain_Fulfillment_MIS_Dashboard.png    # High-resolution dashboard image for preview & documentation
+├── .gitattributes                                    # Git line-ending configurations & binary file attributes
+├── .gitignore                                        # Excludes temporary Excel lock files (~$*) and system cache
+├── LICENSE                                           # MIT License (2026 Rohith Chandran E)
+├── README.md                                         # Project documentation, architecture & business insights
+├── Supply_Chain_Fulfillment_MIS_Dashboard.pdf        # Root convenience copy of executive PDF export
+├── Supply_Chain_Fulfillment_MIS_Dashboard.png        # Root convenience copy of dashboard preview image
+└── Supply_Chain_Fulfillment_MIS_Dashboard.xlsx       # Root convenience copy of interactive Excel workbook
 ```
 
 ---
